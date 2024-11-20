@@ -1,5 +1,15 @@
 import SwiftUI
 
+//@main
+//struct CrashTest2App: App {
+//    var body: some Scene {
+//        WindowGroup {
+//            SimpleView()
+//                .environmentObject(SimpleModel())
+//        }
+//    }
+//}
+
 // シンプルなモデル
 class SimpleModel: ObservableObject {
     @Published var member: String = "Alice"

@@ -1,5 +1,15 @@
 import SwiftUI
 
+@main
+struct CrashTest2App: App {
+    var body: some Scene {
+        WindowGroup {
+            Breakfast()
+                .environmentObject(BreakModel())
+        }
+    }
+}
+
 // BreakModelクラス
 class BreakModel: ObservableObject {
     @Published var member: String = ""
