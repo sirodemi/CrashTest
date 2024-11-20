@@ -1,24 +1,39 @@
-//
-//  ContentView.swift
-//  CrashTest2
-//
-//  Created by shiro ibi on 2024/11/20.
-//
-
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-        }
-        .padding()
+// BreakModelクラス
+class BreakModel: ObservableObject {
+    @Published var member: String = ""
+}
+
+// MockUpクラス
+class MockUp: BreakModel {
+    override init() {
+        super.init()
+        self.member = "Alice" // デフォルト値
     }
 }
 
-#Preview {
-    ContentView()
+// Breakfastビュー
+struct Breakfast: View {
+    @EnvironmentObject var breakfast: BreakModel
+
+    let friends = ["Alice", "Bob", "Charlie", "David"]
+
+    var body: some View {
+        Picker("Select a friend", selection: $breakfast.member) {
+            ForEach(friends, id: \.self) { friend in
+                Text(friend).tag(friend)
+            }
+        }
+        .pickerStyle(MenuPickerStyle())
+    }
 }
+
+// プレビュー
+struct Breakfast_Previews: PreviewProvider {
+    static var previews: some View {
+        Breakfast()
+            .environmentObject(MockUp()) // MockUpでプレビューのオブジェクトを設定
+    }
+}
+
